@@ -1,0 +1,47 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Users {
+  id           String         @id @default(uuid())
+  name         String
+  phone        String         @unique
+  password     String?
+  imageUrl     String?
+  role         UserRoles      @default(USER)
+  createdAt    DateTime       @default(now())
+  appointments Appointments[] // This creates the relation to the Appointments model
+}
+
+model Appointments {
+  id              String            @id @default(uuid())
+  appointmentDate DateTime          @db.Date
+  queueNumber     Int
+  status          AppointmentStatus @default(BOOKED)
+  createdAt       DateTime          @default(now())
+
+  patient   Users  @relation(fields: [patientId], references: [id])
+  patientId String // This is the foreign key
+
+  @@unique([patientId, appointmentDate])
+  @@index([appointmentDate])
+}
+
+enum UserRoles {
+  USER
+  ADMIN
+}
+
+enum AppointmentStatus {
+  BOOKED
+  CHECKED_IN
+  COMPLETED
+  CANCELLED_USER
+  CANCELLED_ADMIN
+}
