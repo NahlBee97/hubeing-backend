@@ -10,16 +10,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/NahlBee97/jatmiko-backend.git"
+    "url": "git+https://github.com/NahlBee97/hubeing-backend.git"
   },
   "keywords": [],
   "author": "nahalil",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/NahlBee97/jatmiko-backend/issues"
+    "url": "https://github.com/NahlBee97/hubeing-backend/issues"
   },
-  "homepage": "https://github.com/NahlBee97/jatmiko-backend#readme",
-  "description": "Jatmiko Backend",
+  "homepage": "https://github.com/NahlBee97/hubeing-backend#readme",
+  "description": "hubeing Backend",
   "prisma": {
     "seed": "tsx prisma/seed.ts"
   },
