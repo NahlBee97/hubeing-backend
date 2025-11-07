@@ -10,7 +10,7 @@ dotenv.config();
 const app = express();
 
 // Routes
-
+import AuthRouter from "./routes/authRoutes";
 // cors
 app.use(
   cors({
@@ -28,6 +28,7 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 // Main Endpoints
+app.use("/api/auth", AuthRouter);
 
 // --- Central Error Handler ---
 app.use(globalErrorHandler);
