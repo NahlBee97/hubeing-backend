@@ -11,6 +11,7 @@ const app = express();
 
 // Routes
 import AuthRouter from "./routes/authRoutes";
+import AppointmentRouter from "./routes/appointmentRoutes"
 // cors
 app.use(
   cors({
@@ -20,15 +21,15 @@ app.use(
 );
 
 app.use(express.json());
-app.use(cookieParser());
 
 // --- Routes ---
 app.get("/", (req: Request, res: Response) => {
-  res.send("Jatmiko Backend Connected");
+  res.send("Connected");
 });
 
 // Main Endpoints
 app.use("/api/auth", AuthRouter);
+app.use("/api/appointment", AppointmentRouter);
 
 // --- Central Error Handler ---
 app.use(globalErrorHandler);
