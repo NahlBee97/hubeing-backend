@@ -1,9 +1,10 @@
 import { Router } from "express";
 import { VerifyToken } from "../middlewares/authMiddlewares";
-import { CreateAppointmentController } from "../controllers/appointmentControllers";
+import { CreateAppointmentController, GetUserAppointmentByDateController } from "../controllers/appointmentControllers";
 
 const router = Router();
 
+router.get("/:date", VerifyToken, GetUserAppointmentByDateController);
 router.post("/", VerifyToken, CreateAppointmentController);
 
 export default router;

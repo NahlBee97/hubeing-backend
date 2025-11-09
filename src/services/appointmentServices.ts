@@ -1,5 +1,25 @@
 import { prisma } from "../lib/prisma";
 
+export async function GetUserAppointmentByDateService(
+  date: Date,
+  userId: string
+) {
+  try {
+    const appointments = await prisma.appointments.findMany({
+      where: {
+        patientId: userId,
+        appointmentDate: date,
+      },
+      include: {
+        patient: true
+      }
+    });
+    return appointments;
+  } catch (error) {
+    throw error;
+  }
+}
+
 export async function CreateAppointmentService(
   appointmentDate: Date,
   userId: string
