@@ -11,9 +11,49 @@ export async function GetUserAppointmentByDateService(
         appointmentDate: date,
       },
       include: {
-        patient: true
-      }
+        patient: true,
+      },
     });
+    return appointments;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function GetUserAppointmentsService(
+  userId: string,
+  isPast: string
+) {
+  const today = new Date();
+
+  try {
+    let appointments = [];
+    if (isPast === "true") {
+      appointments = await prisma.appointments.findMany({
+        where: {
+          patientId: userId,
+          appointmentDate: {
+            lt: today,
+          },
+        },
+        include: {
+          patient: true,
+        },
+      });
+    } else {
+      appointments = await prisma.appointments.findMany({
+        where: {
+          patientId: userId,
+          appointmentDate: {
+            gte: today,
+          },
+        },
+        include: {
+          patient: true,
+        },
+      });
+    }
+
     return appointments;
   } catch (error) {
     throw error;

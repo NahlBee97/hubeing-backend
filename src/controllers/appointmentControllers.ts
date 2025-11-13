@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { CreateAppointmentService, GetUserAppointmentByDateService } from "../services/appointmentServices";
+import { CreateAppointmentService, GetUserAppointmentByDateService, GetUserAppointmentsService } from "../services/appointmentServices";
 
 export async function GetUserAppointmentByDateController(
   req: Request,
@@ -14,6 +14,23 @@ export async function GetUserAppointmentByDateController(
     const userId = req.user?.id as string;
 
     const appointments = await GetUserAppointmentByDateService(utcDate, userId);
+
+    res.status(200).json({ message: "Get appointments successfully", appointments });
+  } catch (error) {
+    next(error);
+  }
+}
+
+export async function GetUserAppointmentsController(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  try {
+    const userId = req.params.id as string;
+    const isPast = req.query.past as string;
+
+    const appointments = await GetUserAppointmentsService(userId, isPast);
 
     res.status(200).json({ message: "Get appointments successfully", appointments });
   } catch (error) {
