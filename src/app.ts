@@ -12,6 +12,8 @@ const app = express();
 // Routes
 import AuthRouter from "./routes/authRoutes";
 import AppointmentRouter from "./routes/appointmentRoutes"
+import UserRouter from "./routes/userRoutes"
+
 // cors
 app.use(
   cors({
@@ -29,7 +31,8 @@ app.get("/", (req: Request, res: Response) => {
 
 // Main Endpoints
 app.use("/api/auth", AuthRouter);
-app.use("/api/appointment", AppointmentRouter);
+app.use("/api/appointments", AppointmentRouter);
+app.use("/api/users", UserRouter)
 
 // --- Central Error Handler ---
 app.use(globalErrorHandler);
