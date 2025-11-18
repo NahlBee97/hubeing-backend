@@ -1,11 +1,12 @@
 import { Router } from "express";
-import { VerifyToken } from "../middlewares/authMiddlewares";
-import { CreateAppointmentController, GetUserAppointmentByDateController, GetUserAppointmentsController } from "../controllers/appointmentControllers";
+import { RoleGuard, VerifyToken } from "../middlewares/authMiddlewares";
+import { CreateAppointmentController, GetAppointmentSummaryController, GetUserAppointmentByDateController, GetUserAppointmentsController } from "../controllers/appointmentControllers";
 
 const router = Router();
 
-router.get("/:date", VerifyToken, GetUserAppointmentByDateController);
 router.get("/user/:id", VerifyToken, GetUserAppointmentsController);
+router.get("/summary", GetAppointmentSummaryController);
+router.get("/:date", VerifyToken, GetUserAppointmentByDateController);
 router.post("/", VerifyToken, CreateAppointmentController);
 
 export default router;

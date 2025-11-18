@@ -36,12 +36,6 @@ export function globalErrorHandler(
     }));
   }
 
-  //   rajaongkir errors
-  if (axios.isAxiosError(error)) {
-    status = error.response?.data.meta.code;
-    message = error.response?.data.meta.message;
-  }
-
   console.error(error);
 
   if (status && message) {

@@ -1,5 +1,4 @@
 import express, { Request, Response } from "express";
-import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import cors from "cors";
 import { FE_URL } from "./config";

@@ -47,6 +47,7 @@
     "typescript": "^5.9.3"
   },
   "dependencies": {
+    "@faker-js/faker": "^10.1.0",
     "@prisma/client": "^6.19.0",
     "axios": "^1.13.2",
     "bcryptjs": "^3.0.3",

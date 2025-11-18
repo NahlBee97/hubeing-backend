@@ -1,5 +1,19 @@
 import { NextFunction, Request, Response } from "express";
-import { CreateAppointmentService, GetUserAppointmentByDateService, GetUserAppointmentsService } from "../services/appointmentServices";
+import { CreateAppointmentService, GetAppointmentSummaryService, GetUserAppointmentByDateService, GetUserAppointmentsService } from "../services/appointmentServices";
+
+export async function GetAppointmentSummaryController(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  try {
+    const summary = await GetAppointmentSummaryService();
+
+    res.status(200).json({ message: "Get summary successfully", summary });
+  } catch (error) {
+    next(error);
+  }
+}
 
 export async function GetUserAppointmentByDateController(
   req: Request,
