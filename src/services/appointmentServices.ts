@@ -61,6 +61,24 @@ export async function GetAppointmentSummaryService() {
   }
 }
 
+export async function GetAllAppointmentByDateService(
+  date: Date,
+) {
+  try {
+    const appointments = await prisma.appointments.findMany({
+      where: {
+        appointmentDate: date,
+      },
+      include: {
+        patient: true,
+      },
+    });
+    return appointments;
+  } catch (error) {
+    throw error;
+  }
+}
+
 export async function GetUserAppointmentByDateService(
   date: Date,
   userId: string
